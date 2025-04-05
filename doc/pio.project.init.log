@@ -1,0 +1,16 @@
+Sat  5 Apr 13:22:03 UTC 2025
+
+ $  pio project init --board adafruit_feather_m0_express
+
+The following files/directories have been created in /my/fake/path/gps-rot-lcd25-a
+include - Put project header files here
+lib - Put project specific (private) libraries here
+src - Put project source files here
+platformio.ini - Project Configuration File
+Resolving adafruit_feather_m0_express dependencies...
+Already up-to-date.
+Project has been successfully initialized!
+
+ $ 
+
+end.
