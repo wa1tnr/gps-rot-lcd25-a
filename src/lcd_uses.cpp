@@ -10,7 +10,7 @@ void lcd_revision(void) {
     char buffer[64];
     glcd.clear();
 
-    snprintf(buffer, sizeof(buffer), "%s", "Sat 5 Apr 17:08z");
+    snprintf(buffer, sizeof(buffer), "%s", "Sat  5 Apr    17:12z");
     glcd.drawstring(1, 1, buffer);
 
     snprintf(buffer, sizeof(buffer), "%s", "  CHUPACABRA");

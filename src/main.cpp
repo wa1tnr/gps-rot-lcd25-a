@@ -9,9 +9,9 @@
 
 void blinkWaiting() {
     digitalWrite(LED_BUILTIN, HIGH);
-    delay(100);
+    delay(20);
     digitalWrite(LED_BUILTIN, LOW);
-    delay(100);
+    delay(9100);
 }
 
 void initSerial() {
