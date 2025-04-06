@@ -1,5 +1,5 @@
 /** lcd_uses.cpp
- * Sat Apr  5 17:20:21 UTC 2025
+ * Sun  6 Apr 18:22:37 UTC 2025
  */
 
 #include "ST7565.h"
@@ -9,8 +9,7 @@ ST7565 glcd(11, 10, 9, 6, 5);
 void lcd_revision(void) {
     char buffer[64];
     glcd.clear();
-    // snprintf(buffer, sizeof(buffer), "%s", "Sat  5 Apr    17:12z");
-    snprintf(buffer, sizeof(buffer), "%s", "Sat  5 Apr 17:20:21z");
+    snprintf(buffer, sizeof(buffer), "%s", "Sun  6 Apr 18:22:37z");
     glcd.drawstring(1, 1, buffer);
 
     snprintf(buffer, sizeof(buffer), "%s", "  CHUPACABRA");
