@@ -1,5 +1,5 @@
 /** main.cpp
- * Sun  6 Apr 18:22:37 UTC 2025
+ * Mon  7 Apr 19:05:51 UTC 2025
  * Sat  5 Apr 13:35:03 UTC 2025
  */
 
@@ -52,27 +52,55 @@ void initGPIO() {
     pinMode(LED_BUILTIN, OUTPUT);
 }
 
-void printLongLat(int32_t Longitude, int32_t Latitude) {
-    iter++;
+void printLatLongFixed(int32_t latitudeFixed, int32_t longitudeFixed) {
     Serial.print(iter);
     Serial.write(':');
     Serial.write(' ');
-    Serial.print(Latitude);
+    Serial.print(latitudeFixed);
     Serial.write(' ');
     Serial.write(' ');
-    Serial.print(Longitude);
+    Serial.print(longitudeFixed);
+    Serial.println("");
+}
+
+void printLatLongFloat(nmea_float_t latitudeFloat,
+                       nmea_float_t longitudeFloat) {
+    Serial.print(iter);
+    Serial.write(':');
+    Serial.write(' ');
+    Serial.print(latitudeFloat, 4);
+    Serial.write(' ');
+    Serial.write(' ');
+    Serial.print(longitudeFloat, 4);
     Serial.println("");
 }
 
 void locating() {
-    int32_t Longitude = 0;
-    int32_t Latitude = 0;
-    Longitude = GPS.longitude_fixed;
-    Longitude = abs(Longitude);
-    Latitude = GPS.latitude_fixed;
-    Latitude = abs(Latitude);
-    printLongLat(Longitude, Latitude);
+    int32_t latitudeFixed = 0;
+    int32_t longitudeFixed = 0;
+    nmea_float_t latitudeFloat;
+    nmea_float_t longitudeFloat;
+
+    latitudeFixed = GPS.latitude_fixed;
+    latitudeFixed = abs(latitudeFixed);
+
+    latitudeFloat = GPS.latitude;
+    latitudeFloat = abs(latitudeFloat);
+
+    longitudeFixed = GPS.longitude_fixed;
+    longitudeFixed = abs(longitudeFixed);
+
+    longitudeFloat = GPS.longitude;
+    longitudeFloat = abs(longitudeFloat);
+
+    iter++;
+    printLatLongFixed(latitudeFixed, longitudeFixed);
+    Serial.write(' ');
+    Serial.write(' ');
+    printLatLongFloat(latitudeFloat, longitudeFloat);
 }
+
+const bool doPrintNMEA = true;
 
 void setup() {
     initGPIO();
@@ -84,6 +112,9 @@ void setup() {
 void loop() {
     GPS.read();
     if (GPS.newNMEAreceived()) {
+        if (doPrintNMEA) {
+            Serial.print(GPS.lastNMEA());
+        }
         if (!GPS.parse(GPS.lastNMEA())) // this also sets the
                                         // newNMEAreceived() flag to false
             return;                     // we can fail to parse a sentence
