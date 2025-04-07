@@ -100,7 +100,7 @@ void locating() {
     printLatLongFloat(latitudeFloat, longitudeFloat);
 }
 
-const bool doPrintNMEA = true;
+const bool doPrintNMEA = false; // for debug: true;
 
 void setup() {
     initGPIO();
